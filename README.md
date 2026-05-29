@@ -6,23 +6,21 @@ A full-stack inventory management application built with **Spring Boot**, **Reac
 
 ## 🖼️ Screenshots
 
-> ⚠️ **[SCREENSHOT NEEDED]** — Run your app and take these 4 screenshots. Save them in a folder called `assets/` inside the repo, then replace the paths below.
-
 ### Dashboard — Inventory Overview
 ![Dashboard](assets/dashboard.png)
-> *Capture: The main React dashboard showing the product list/table with all inventory items visible*
+> *The main React dashboard showing the product list/table with all inventory items visible*
 
 ### Add Product Form
 ![Add Product](assets/add-product.png)
-> *Capture: The modal or form for adding a new product — fill in some sample data before screenshotting*
+> *The modal or form for adding a new product*
 
 ### Edit / Update Product
 ![Edit Product](assets/edit-product.png)
-> *Capture: The edit form open for an existing product*
+> The edit form open for an existing product*
 
 ### Stock / Supplier View
 ![Supplier View](assets/supplier-view.png)
-> *Capture: The supplier or stock section of the dashboard*
+> *The supplier or stock section of the dashboard*
 
 ---
 
@@ -116,8 +114,8 @@ Update `warehouse/src/main/resources/application.properties`:
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/warehouse_db
-spring.datasource.username=your_mysql_username
-spring.datasource.password=your_mysql_password
+spring.datasource.username=root
+spring.datasource.password=Root
 spring.jpa.hibernate.ddl-auto=update
 ```
 
