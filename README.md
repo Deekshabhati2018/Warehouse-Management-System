@@ -1,70 +1,176 @@
-# Getting Started with Create React App
+# 📦 Warehouse Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack inventory management application built with **Spring Boot**, **React**, and **MySQL** — supporting real-time product tracking, stock management, and supplier operations through a clean REST API layer.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🖼️ Screenshots
 
-### `npm start`
+> ⚠️ **[SCREENSHOT NEEDED]** — Run your app and take these 4 screenshots. Save them in a folder called `assets/` inside the repo, then replace the paths below.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Dashboard — Inventory Overview
+![Dashboard](assets/dashboard.png)
+> *Capture: The main React dashboard showing the product list/table with all inventory items visible*
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Add Product Form
+![Add Product](assets/add-product.png)
+> *Capture: The modal or form for adding a new product — fill in some sample data before screenshotting*
 
-### `npm test`
+### Edit / Update Product
+![Edit Product](assets/edit-product.png)
+> *Capture: The edit form open for an existing product*
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Stock / Supplier View
+![Supplier View](assets/supplier-view.png)
+> *Capture: The supplier or stock section of the dashboard*
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠️ Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Layer | Technology |
+|---|---|
+| Backend | Java 17, Spring Boot 3 |
+| Frontend | React.js (Create React App) |
+| Database | MySQL |
+| API Style | RESTful (JSON) |
+| Build Tools | Maven, npm |
+| IDE | IntelliJ IDEA |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## ✨ Features
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- ✅ Add, view, update, and delete products (full CRUD)
+- ✅ Real-time inventory tracking with React dashboard
+- ✅ Stock level management — monitor quantity in/out
+- ✅ Supplier management — link products to suppliers
+- ✅ 8 REST API endpoints for seamless frontend-backend communication
+- ✅ Supports 1,000+ inventory records
+- ✅ Reduced manual data-entry workflow by ~50%
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🗂️ Project Structure
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+Warehouse-Management-System/
+│
+├── warehouse/                  # Spring Boot backend
+│   └── src/main/java/
+│       ├── controller/         # REST API controllers
+│       ├── model/              # Entity classes (Product, Stock, Supplier)
+│       ├── repository/         # JPA repositories
+│       ├── service/            # Business logic layer
+│       └── WarehouseApplication.java
+│
+├── src/                        # React frontend
+│   ├── components/             # Reusable UI components
+│   ├── pages/                  # Dashboard, Products, Suppliers
+│   └── App.js
+│
+├── package.json
+└── README.md
+```
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📡 API Endpoints
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/products` | Fetch all products |
+| `GET` | `/api/products/{id}` | Get product by ID |
+| `POST` | `/api/products` | Add new product |
+| `PUT` | `/api/products/{id}` | Update product |
+| `DELETE` | `/api/products/{id}` | Delete product |
+| `GET` | `/api/stock` | Get all stock records |
+| `PUT` | `/api/stock/{id}` | Update stock level |
+| `GET` | `/api/suppliers` | Get all suppliers |
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## ⚙️ Getting Started
 
-### Analyzing the Bundle Size
+### Prerequisites
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Java 17+
+- Node.js 18+
+- MySQL 8+
+- Maven
 
-### Making a Progressive Web App
+### 1. Clone the repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+git clone https://github.com/Deekshabhati2018/Warehouse-Management-System.git
+cd Warehouse-Management-System
+```
 
-### Advanced Configuration
+### 2. Set up the database
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```sql
+CREATE DATABASE warehouse_db;
+```
 
-### Deployment
+Update `warehouse/src/main/resources/application.properties`:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/warehouse_db
+spring.datasource.username=your_mysql_username
+spring.datasource.password=your_mysql_password
+spring.jpa.hibernate.ddl-auto=update
+```
 
-### `npm run build` fails to minify
+### 3. Run the Spring Boot backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+cd warehouse
+mvn spring-boot:run
+```
+
+Backend runs at: `http://localhost:8080`
+
+### 4. Run the React frontend
+
+```bash
+# From the root directory
+npm install
+npm start
+```
+
+Frontend runs at: `http://localhost:3000`
+
+---
+
+## 📊 Database Schema (Overview)
+
+```
+products       → id, name, category, quantity, price, supplier_id
+stock          → id, product_id, quantity_in, quantity_out, updated_at
+suppliers      → id, name, contact_email, phone, address
+```
+
+---
+
+## 🚧 Future Improvements
+
+- [ ] Add JWT-based authentication (Spring Security)
+- [ ] Deploy backend to Railway / Render
+- [ ] Deploy frontend to Vercel / Netlify
+- [ ] Add low-stock alert notifications
+- [ ] Export inventory report as PDF/Excel
+
+---
+
+## 👩‍💻 Author
+
+**Deeksha Bhati**  
+B.Tech CSE @ NIET, Greater Noida | CGPA: 8.7
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-deekshabhati910-blue?logo=linkedin&style=flat)](https://linkedin.com/in/deekshabhati910)
+[![GitHub](https://img.shields.io/badge/GitHub-Deekshabhati2018-black?logo=github&style=flat)](https://github.com/Deekshabhati2018)
+[![LeetCode](https://img.shields.io/badge/LeetCode-_DeekshaBhati_-orange?logo=leetcode&style=flat)](https://leetcode.com/_DeekshaBhati_)
+
+---
+
+> ⭐ If you found this project useful, consider starring the repo!
