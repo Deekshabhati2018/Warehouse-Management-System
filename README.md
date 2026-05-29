@@ -1,26 +1,26 @@
-# 📦 Warehouse Management System
+# 💗 Pretty Pink Warehouse — Warehouse Management System
 
-A full-stack inventory management application built with **Spring Boot**, **React**, and **MySQL** — supporting real-time product tracking, stock management, and supplier operations through a clean REST API layer.
+A full-stack inventory management application built with **Java Spring Boot**, **React.js**, and **MySQL**. Supports real-time product tracking with complete CRUD operations through a clean REST API.
 
 ---
 
 ## 🖼️ Screenshots
 
-### Dashboard — Inventory Overview
-![Dashboard](assets/dashboard.png)
-> *The main React dashboard showing the product list/table with all inventory items visible*
+### React Frontend — Product Dashboard
+![Frontend Dashboard](assets/frontend-dashboard.png)
+> Live product cards with Name, Price, Quantity, SKU — Add, Edit, Delete operations in real time at `localhost:3000`
 
-### Add Product Form
-![Add Product](assets/add-product.png)
-> *The modal or form for adding a new product*
+### REST API — Postman Test (GET /products)
+![API Response](assets/api-postman.png)
+> `GET http://localhost:8080/products` returning `200 OK` in 471ms with full JSON product list
 
-### Edit / Update Product
-![Edit Product](assets/edit-product.png)
-> The edit form open for an existing product*
+### Spring Boot Backend — Eclipse IDE
+![Backend Code](assets/backend-eclipse.png)
+> `Product.java` entity with `id`, `name`, `sku`, `price`, `quantity` fields — Spring Boot app started on port 8080 in 6.79s
 
-### Stock / Supplier View
-![Supplier View](assets/supplier-view.png)
-> *The supplier or stock section of the dashboard*
+### Frontend Compilation — npm start
+![npm start](assets/npm-start.png)
+> React app (`wms-frontend`) compiled successfully and served at `localhost:3000`
 
 ---
 
@@ -28,24 +28,26 @@ A full-stack inventory management application built with **Spring Boot**, **Reac
 
 | Layer | Technology |
 |---|---|
-| Backend | Java 17, Spring Boot 3 |
+| Backend | Java 17, Spring Boot, Spring Data JPA, Hibernate |
 | Frontend | React.js (Create React App) |
 | Database | MySQL |
-| API Style | RESTful (JSON) |
+| API Style | RESTful JSON |
+| API Testing | Postman |
 | Build Tools | Maven, npm |
-| IDE | IntelliJ IDEA |
+| IDE | Eclipse IDE for Enterprise Java |
 
 ---
 
 ## ✨ Features
 
-- ✅ Add, view, update, and delete products (full CRUD)
-- ✅ Real-time inventory tracking with React dashboard
-- ✅ Stock level management — monitor quantity in/out
-- ✅ Supplier management — link products to suppliers
-- ✅ 8 REST API endpoints for seamless frontend-backend communication
-- ✅ Supports 1,000+ inventory records
-- ✅ Reduced manual data-entry workflow by ~50%
+- ✅ Add new products with Name, SKU, Price, and Quantity
+- ✅ View all inventory as real-time product cards
+- ✅ Edit existing product details inline
+- ✅ Delete products with instant UI update
+- ✅ Spring Boot REST API with full CRUD endpoints
+- ✅ React frontend auto-syncs with backend on every operation
+- ✅ MySQL persistence via Spring Data JPA + Hibernate
+- ✅ Tomcat embedded server — no external server setup needed
 
 ---
 
@@ -54,20 +56,19 @@ A full-stack inventory management application built with **Spring Boot**, **Reac
 ```
 Warehouse-Management-System/
 │
-├── warehouse/                  # Spring Boot backend
-│   └── src/main/java/
-│       ├── controller/         # REST API controllers
-│       ├── model/              # Entity classes (Product, Stock, Supplier)
-│       ├── repository/         # JPA repositories
-│       ├── service/            # Business logic layer
-│       └── WarehouseApplication.java
+├── warehouse/                          # Spring Boot backend
+│   └── src/main/java/com/wms/warehouse/
+│       ├── WarehouseApplication.java   # Main entry point
+│       ├── controller/                 # REST controllers
+│       ├── entity/
+│       │   └── Product.java            # id, name, sku, price, quantity
+│       └── repository/                 # Spring Data JPA repositories
 │
-├── src/                        # React frontend
-│   ├── components/             # Reusable UI components
-│   ├── pages/                  # Dashboard, Products, Suppliers
-│   └── App.js
+├── src/                                # React frontend
+│   └── (components, pages, App.js)
 │
-├── package.json
+├── pom.xml                             # Maven config
+├── package.json                        # npm config
 └── README.md
 ```
 
@@ -75,16 +76,43 @@ Warehouse-Management-System/
 
 ## 📡 API Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/products` | Fetch all products |
-| `GET` | `/api/products/{id}` | Get product by ID |
-| `POST` | `/api/products` | Add new product |
-| `PUT` | `/api/products/{id}` | Update product |
-| `DELETE` | `/api/products/{id}` | Delete product |
-| `GET` | `/api/stock` | Get all stock records |
-| `PUT` | `/api/stock/{id}` | Update stock level |
-| `GET` | `/api/suppliers` | Get all suppliers |
+Base URL: `http://localhost:8080`
+
+| Method | Endpoint | Description | Status |
+|--------|----------|-------------|--------|
+| `GET` | `/products` | Fetch all products | `200 OK` |
+| `GET` | `/products/{id}` | Get product by ID | `200 OK` |
+| `POST` | `/products` | Add new product | `201 Created` |
+| `PUT` | `/products/{id}` | Update product | `200 OK` |
+| `DELETE` | `/products/{id}` | Delete product | `204 No Content` |
+
+### Sample API Response — `GET /products`
+
+```json
+[
+  {
+    "id": 1,
+    "name": "HP Laptop",
+    "price": 65000.0,
+    "quantity": 100,
+    "sku": "HP101"
+  },
+  {
+    "id": 2,
+    "name": "Iphone 17 pro",
+    "price": 150000.0,
+    "quantity": 50,
+    "sku": "UI102"
+  },
+  {
+    "id": 4,
+    "name": "Pink Nike Shoes",
+    "price": 8500.0,
+    "quantity": 25,
+    "sku": "Nik103"
+  }
+]
+```
 
 ---
 
@@ -104,19 +132,16 @@ git clone https://github.com/Deekshabhati2018/Warehouse-Management-System.git
 cd Warehouse-Management-System
 ```
 
-### 2. Set up the database
+### 2. Configure the database
 
-```sql
-CREATE DATABASE warehouse_db;
-```
-
-Update `warehouse/src/main/resources/application.properties`:
+Create a MySQL database and update `warehouse/src/main/resources/application.properties`:
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/warehouse_db
-spring.datasource.username=root
-spring.datasource.password=Root
+spring.datasource.username=your_username
+spring.datasource.password=your_password
 spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
 ```
 
 ### 3. Run the Spring Boot backend
@@ -126,37 +151,42 @@ cd warehouse
 mvn spring-boot:run
 ```
 
-Backend runs at: `http://localhost:8080`
+Backend starts at: `http://localhost:8080`  
+> Spring Boot initializes in ~7 seconds, Tomcat on port 8080
 
 ### 4. Run the React frontend
 
 ```bash
-# From the root directory
+# From root directory
 npm install
 npm start
 ```
 
-Frontend runs at: `http://localhost:3000`
+Frontend starts at: `http://localhost:3000`
 
 ---
 
-## 📊 Database Schema (Overview)
+## 🧱 Data Model
 
 ```
-products       → id, name, category, quantity, price, supplier_id
-stock          → id, product_id, quantity_in, quantity_out, updated_at
-suppliers      → id, name, contact_email, phone, address
+Product
+├── id          Long       (auto-generated)
+├── name        String     e.g. "HP Laptop"
+├── sku         String     e.g. "HP101"
+├── price       double     e.g. 65000.0
+└── quantity    int        e.g. 100
 ```
 
 ---
 
 ## 🚧 Future Improvements
 
-- [ ] Add JWT-based authentication (Spring Security)
+- [ ] JWT authentication (Spring Security)
+- [ ] Supplier and category management
+- [ ] Low-stock alerts
 - [ ] Deploy backend to Railway / Render
-- [ ] Deploy frontend to Vercel / Netlify
-- [ ] Add low-stock alert notifications
-- [ ] Export inventory report as PDF/Excel
+- [ ] Deploy frontend to Vercel
+- [ ] Export inventory as Excel/PDF
 
 ---
 
@@ -172,3 +202,4 @@ B.Tech CSE @ NIET, Greater Noida | CGPA: 8.7
 ---
 
 > ⭐ If you found this project useful, consider starring the repo!
+
